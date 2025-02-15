@@ -12,6 +12,7 @@ impl Machine {
     pub fn from_input(input: String) -> Self {
         let mut parser = Parser::from_input(input);
         let instrs = parser.parse();
+
         Self {
             instrs,
             // instr_ptr: 0,
@@ -40,8 +41,12 @@ impl Machine {
             }
 
             Instr::Loop(loop_instrs) => {
-                for instr in loop_instrs {
-                    self.step_instr(instr);
+                // dbg!(&loop_instrs);
+                while self.data[self.data_ptr] != 0 {
+                    for instr in loop_instrs {
+                        // println!("stepping {:?}", instr);
+                        self.step_instr(instr);
+                    }
                 }
             }
         }
@@ -88,5 +93,39 @@ mod tests {
         let mut machine = Machine::from_input("+++-".into());
         machine.execute();
         assert_eq!(machine.data[0], 2);
+    }
+
+    #[test]
+    fn add_nums() {
+        use Instr::*;
+        let input = include_str!("../test_cases/add_nums.bf").to_string();
+        let machine = Machine::from_input(input);
+        assert_eq!(
+            machine.instrs,
+            vec![
+                IncrVal,
+                IncrVal,
+                Right,
+                IncrVal,
+                IncrVal,
+                IncrVal,
+                IncrVal,
+                IncrVal,
+                Loop(vec![Left, IncrVal, Right, DecrVal]),
+                IncrVal,
+                IncrVal,
+                IncrVal,
+                IncrVal,
+                IncrVal,
+                IncrVal,
+                IncrVal,
+                IncrVal,
+                Loop(vec![
+                    Left, IncrVal, IncrVal, IncrVal, IncrVal, IncrVal, IncrVal, Right, DecrVal
+                ]),
+                Left,
+                Out
+            ]
+        );
     }
 }

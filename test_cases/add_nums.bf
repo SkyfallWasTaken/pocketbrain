@@ -12,6 +12,7 @@ but we cannot output this value to the terminal since it is not ASCII encoded
 To display the ASCII character "7" we must add 48 to the value 7
 We use a loop to compute 48 = 6 * 8
 
+Hmm this loop isn't running :thonk:
 ++++ ++++  c1 = 8 and this will be our loop counter again
 [
 < +++ +++  Add 6 to c0
