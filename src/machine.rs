@@ -1,4 +1,5 @@
 use crate::parser::{Instr, Parser};
+use std::io::{self, Read};
 
 pub struct Machine {
     instrs: Vec<Instr>,
@@ -27,7 +28,16 @@ impl Machine {
             Instr::DecrVal => self.data[self.data_ptr] -= 1,
             Instr::IncrVal => self.data[self.data_ptr] += 1,
 
-            Instr::In | Instr::Out => todo!("in/out not yet impl'd"),
+            Instr::In => {
+                let mut buf = [0; 1];
+                io::stdin().read_exact(&mut buf).unwrap(); // TODO: don't panic here!
+                let byte = buf[0];
+                self.data[self.data_ptr] = byte;
+            }
+            Instr::Out => {
+                let byte = self.data[self.data_ptr];
+                println!("{}", byte as char);
+            }
 
             Instr::Loop(loop_instrs) => {
                 for instr in loop_instrs {
