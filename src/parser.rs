@@ -70,3 +70,29 @@ impl Parser {
         instrs
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use pretty_assertions::assert_eq;
+    use Instr::*;
+
+    #[test]
+    fn nested_loops() {
+        let input = "
+            .
+            [
+              +
+              [
+                -
+              ]
+            ]
+            +";
+        let mut parser = Parser::from_input(input.to_string());
+        let instrs = parser.parse();
+        assert_eq!(
+            instrs,
+            vec![Out, Loop(vec![IncrVal, Loop(vec![DecrVal])]), IncrVal]
+        )
+    }
+}
