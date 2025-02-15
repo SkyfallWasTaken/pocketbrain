@@ -42,7 +42,7 @@ impl Machine {
             }
             Instr::Out => {
                 let byte = self.data[self.data_ptr];
-                println!("{}", byte as char);
+                print!("{}", byte as char);
             }
 
             Instr::Loop(loop_instrs) => {
