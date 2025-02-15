@@ -12,6 +12,7 @@ impl Machine {
     pub fn from_input(input: String) -> Self {
         let mut parser = Parser::from_input(input);
         let instrs = parser.parse();
+        // dbg!(&instrs);
 
         Self {
             instrs,
@@ -23,8 +24,12 @@ impl Machine {
 
     pub fn step_instr(&mut self, instr: &Instr) {
         match instr {
-            Instr::Left => self.data_ptr -= 1,
-            Instr::Right => self.data_ptr += 1,
+            Instr::Left => {
+                self.data_ptr = self.data_ptr.overflowing_sub(1).0;
+            }
+            Instr::Right => {
+                self.data_ptr = self.data_ptr.overflowing_add(1).0;
+            }
 
             Instr::DecrVal => self.data[self.data_ptr] -= 1,
             Instr::IncrVal => self.data[self.data_ptr] += 1,
@@ -41,7 +46,6 @@ impl Machine {
             }
 
             Instr::Loop(loop_instrs) => {
-                // dbg!(&loop_instrs);
                 while self.data[self.data_ptr] != 0 {
                     for instr in loop_instrs {
                         // println!("stepping {:?}", instr);
