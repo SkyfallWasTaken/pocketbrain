@@ -1,5 +1,7 @@
 [package]
 name = "pocketbrain"
+description = "A fast Brainfuck interpreter"
+license = "MIT"
 authors = ["Mahad Kalam"]
 version = "0.1.0"
 edition = "2021"
