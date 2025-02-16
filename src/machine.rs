@@ -31,12 +31,8 @@ impl Machine {
                 self.data_ptr = self.data_ptr.overflowing_add(1).0;
             }
 
-            Instr::DecrVal => {
-                self.data[self.data_ptr] = self.data[self.data_ptr].overflowing_sub(1).0
-            }
-            Instr::IncrVal => {
-                self.data[self.data_ptr] = self.data[self.data_ptr].overflowing_add(1).0
-            }
+            Instr::DecrVal => self.data[self.data_ptr] -= 1,
+            Instr::IncrVal => self.data[self.data_ptr] += 1,
 
             Instr::In => {
                 let mut buf = [0; 1];
