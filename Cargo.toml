@@ -3,7 +3,7 @@ name = "pocketbrain"
 description = "A fast Brainfuck interpreter"
 license = "MIT"
 authors = ["Mahad Kalam"]
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 
 [dev-dependencies]
