@@ -1,6 +1,6 @@
 # PocketBrain
 
-A fast, reliable Brainf*** interpreter written in Rust.
+A fast, reliable Brainfuck interpreter written in Rust.
 
 ## Installation
 
@@ -10,14 +10,14 @@ cargo install pocketbrain
 
 ## Usage
 
-Run a Brainf*** file:
+Run a Brainfuck file:
 ```bash
 pocketbrain path/to/your/file.bf
 ```
 
 ## Examples
 
-Here's a simple "Hello, World!" program in Brainf***:
+Here's a simple "Hello, World!" program in Brainfuck:
 ```brainfuck
 ++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.
 ```
