@@ -1,7 +1,11 @@
 [package]
 name = "pocketbrain"
+authors = ["Mahad Kalam"]
 version = "0.1.0"
 edition = "2021"
 
 [dev-dependencies]
 pretty_assertions = "1.4.1"
+
+[dependencies]
+clap = { version = "4.5.29", features = ["derive"] }
